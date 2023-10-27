@@ -87,3 +87,28 @@ func Delete(id int) error {
 	_, err := config.DB.Exec("DELETE FROM categories WHERE id = ?", id)
 	return err
 }
+
+func GetPagination(page int) []categoryentities.CategoryEntities{
+	offset := (page-1) * 10
+	rows, err := config.DB.Query(`SELECT * FROM categories order by id desc limit 10 offset ?`, offset)
+
+	if err != nil {
+		panic(err)
+	}
+
+	defer rows.Close()
+
+	var categories []categoryentities.CategoryEntities //packgae.func
+
+	for rows.Next() {
+		var category categoryentities.CategoryEntities
+
+		if err := rows.Scan(&category.Id, &category.Name, &category.CreatedAt, &category.UpdatedAt); err != nil {
+			panic(err)
+		}
+
+		categories = append(categories, category)
+	}
+
+	return categories
+}

@@ -27,6 +27,28 @@ func Index(w http.ResponseWriter, r *http.Request) {
 	temp.Execute(w, data) //mengeksekusi pengiriman ke tamplate, yg dikirim response dan data, data return query dari DB
 }
 
+func IndexPagination(w http.ResponseWriter, r *http.Request) {
+	page, _ := strconv.Atoi(r.URL.Query().Get("page"))
+
+	if page == 0 {
+		page = 1
+	}
+	categories := categorymodel.GetPagination(page)
+
+
+	data := map[string]any{
+		"categories": categories,
+	}
+
+	temp, err := template.ParseFiles("views/category/indexpagination.html")
+
+	if err != nil {
+		panic(err)
+	}
+
+	temp.Execute(w, data)
+}
+
 func Add(w http.ResponseWriter, r *http.Request) {
 	if r.Method == "GET" {
 		temp, err := template.ParseFiles("views/category/create.html")
@@ -62,6 +84,7 @@ func Edit(w http.ResponseWriter, r *http.Request) {
 			panic(err)
 		}
 
+		//menangkap parameter ky ID
 		idString := r.URL.Query().Get("id")
 		id, err := strconv.Atoi(idString)
 		if err != nil {
