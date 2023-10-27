@@ -49,27 +49,30 @@
     <!-- End of Navbar -->
 
     <div class="container mt-3">
-      <h2>List Categories</h2>
-      <a href="/categories/add" class="btn btn-primary">Add Category</a>
-      <table class="table table-bordered mt-2 text-center">
-        <thead>
-            <tr>
-                <th>Name</th>
-                <th>Action</th>
-            </tr>
-        </thead>
-        <tbody>
-            {{ range .categories}}
-            <tr>
-                <td> {{ .Name }}</td> <!-- sesuai dengan yg ada di entities -->
-                <td>
-                    <a href="/categoris/edit?id={{ .Id }}" class="btn btn-warning text-light">Edit</a>
-                    <a href="/categories/delete?id={{ .Id }}" class="btn btn-danger text-light" onclick="return confirm('Are you sure to delete this category?')">Delete</a>
-                </td>
-            </tr>
-            {{ end }}
-        </tbody>
-      </table>
+      <div class="row d-flex justify-content-center">
+        <div class="col-4">
+          <h2>Edit Category</h2>
+          <hr />
+
+          <form action="/categories/edit" method="POST">
+            <input type="hidden" name="id" value="{{ .category.Id }}" />
+            <div class="mb-3">
+              <label class="form-label">Name</label>
+              <input
+                type="text"
+                class="form-control"
+                name="name"
+                value="{{ .category.Name}}"
+                autocomplete="off"
+              />
+            </div>
+            <div class="float-end">
+              <a href="/categories" class="btn btn-secondary">Back</a>
+              <button type="submit" class="btn btn-primary">Save</button>
+            </div>
+          </form>
+        </div>
+      </div>
     </div>
   </body>
 </html>
