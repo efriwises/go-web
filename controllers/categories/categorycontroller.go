@@ -29,11 +29,12 @@ func Index(w http.ResponseWriter, r *http.Request) {
 
 func IndexPagination(w http.ResponseWriter, r *http.Request) {
 	page, _ := strconv.Atoi(r.URL.Query().Get("page"))
+	search := r.URL.Query().Get("search")
 
 	if page == 0 {
 		page = 1
 	}
-	categories := categorymodel.GetPagination(page)
+	categories := categorymodel.GetPagination(page, search)
 
 
 	data := map[string]any{

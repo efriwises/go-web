@@ -88,9 +88,9 @@ func Delete(id int) error {
 	return err
 }
 
-func GetPagination(page int) []categoryentities.CategoryEntities{
+func GetPagination(page int, search string) []categoryentities.CategoryEntities{
 	offset := (page-1) * 10
-	rows, err := config.DB.Query(`SELECT * FROM categories order by id desc limit 10 offset ?`, offset)
+	rows, err := config.DB.Query(`SELECT * FROM categories where name like ? order by id desc limit 10 offset ?`,  search + "%", offset)
 
 	if err != nil {
 		panic(err)
