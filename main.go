@@ -1,9 +1,9 @@
 package main
 
 import (
-	"go-web-native/config"
-	categorycontroller "go-web-native/controllers/categories"
-	homecontroller "go-web-native/controllers"
+	"go-web/config"
+	homecontroller "go-web/controllers"
+	categorycontroller "go-web/controllers/categories"
 	"log"
 	"net/http"
 )

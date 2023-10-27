@@ -1,8 +1,8 @@
 package categorymodel
 
 import (
-	"go-web-native/config"
-	categoryentities "go-web-native/entities"
+	"go-web/config"
+	categoryentities "go-web/entities"
 )
 
 // func GetAll() () { awalnya fungsi biasa, tapi kalau ada return jadi dibawahnya

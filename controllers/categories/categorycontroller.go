@@ -1,8 +1,8 @@
 package categorycontroller
 
 import (
-	categoryentities "go-web-native/entities"
-	"go-web-native/models/categorymodel"
+	categoryentities "go-web/entities"
+	"go-web/models/categorymodel"
 	"net/http"
 	"strconv"
 	"text/template"
